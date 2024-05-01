@@ -52,6 +52,8 @@ CREATE TABLE Members (
     LastName VARCHAR(255) NOT NULL,
     Email VARCHAR(255) NOT NULL UNIQUE,
     MembershipDate TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    CHECK (FirstName != ''),
+    CHECK (LastName != '')
 );
 
 CREATE TABLE BorrowRecords (
