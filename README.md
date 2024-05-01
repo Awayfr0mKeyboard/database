@@ -134,4 +134,85 @@
 - ![논리적 모델](./논리적.png)
 
 ## 물리적 데이터 모델
-- ![물리적 모델](./물리적.png)
+- ![논리/물리적 모델](./물리적.png)
+
+
+## SQL (Structed Query Language)
+- 구조화된 질의 언어
+- 관계형 데이터 베이스(RDBMS)에서 데이터 관리를 위해 사용하는 표준화된 언어
+    1. 데이터 정의 언어(DDL)
+        - Data Definition Language
+        - CREATE, DROP, ALTER, TRUNCATE, RENAME
+    2. 데이터 조작 언어(DML)
+        - Data Manipulation Language
+        - INSERT, UPDATE, DELETE
+    3. 데이터 질의 언어(DQL)
+        - Data Query Language
+        - SELECT
+        - DML로 포함이 되는 구분도 존재
+    4. 데이터 제어 언어(DCL)
+        - Data Control Language
+        - GRANT, REVOKE
+    5. 트랜잭션 제어 언어(TCL)
+        - Transaction Control Language
+        - COMMIT, ROLLBACK, SAVEPOINT
+
+## 제약조건
+1. Primary Key (PK)
+    - 각 행을 유일하게 식별할 수 있는 열(열의 조합)
+    - Not Null과 Unique의 속성을 갖는다 (개체 무결성)
+    - 비어 있어도 안되고, 값이 중복되도 안됨
+2. Not Null (NN)
+    - 해당 컬럼에는 반드시 유효한 값이 존재해야 함
+    - Null 값이 허용되지 않음
+3. Unique (UQ)
+    - 해당 컬럼의 각 행은 서로 다른 고유한 값을 가져야 함
+    - Null은 가능
+4. Check
+    - 해당 속성(컬럼, 열)에서 입력될 수 있는 데이터 범위를 제한
+    - 조건에 만족하는 데이터만 입력 가능
+5. Default
+    - 해당 속성에 대한 기본 값을 설정
+    - 만약 값이 명시되지 않으면(null), 지정된 기본 값이 자동으로 입력
+6. Auto Increment (AI)
+    - MySQL에서 사용되는 제약 조건
+    - 기본키에 주로 사용되는 새로운 행이 추가될 때마다 자동으로 숫자가 증가되는 제약 조건
+7. Foreign Key (FK)
+    - 참조(Referential) 무결성 제약 조건
+    - 외래 키 값은 NULL일 수 없고, 참조하는 릴레이션의 기본 키 값과 같아야 한다.
+    - 특징
+        - 관계 데이터 모델에서 릴레이션 간의 관계를 표현
+        - 다른 릴레이션의 기본키를 참조하는 속성
+        - 참조하고 참조되는 양 쪽 릴레이션의 도메인은 서로 같아야 한다.
+        - NULL 값과 중복값이 허용된다.
+    - 문법
+    ```sql
+    FOREIGN KEY (참조하는 컬럼명) REFERENCES 참조되는 테이블명(참조되는 컬럼명)
+    ```
+    - 일반적으로 1:N 관계일 경우, N쪽에 외래키를 생성
+
+## 데이터 타입
+1. 숫자형 데이터 타입
+    - **INT**, INTEGER : 4byte 정수
+    - DECIAMAL(M, N) : 고정 소수점 숫자
+        - M 총 자릿수, N 소수점 자리 수
+    - FLOAT(4byte), DOUBLE(8byte) : 부동 소수점 숫자
+2. 문자열 데이터 타입
+    - CHAR(N) : 고정 길이 문자열, N은 문자열 길이
+    - **VARCHAR(N)** : 가변 길이 문자열, N은 문자열 길이
+    - TEXT, MIDIUMTEXT, LONGTEXT : 긴 텍스트 저장 시
+3. 날짜/시간 데이터 타입
+    - DATE : 'YYYY-MM-DD' 연-월-일
+    - TIME : 'HH:MM:SS' 시-분-초
+    - DATETIME : 'YYYY-MM-DD HH:MM:SS'
+    - TIMESTAMP : 1970-01-01 기준 32비트 정수 유닉스 기반 날짜시간 정보 저장
+4. 이진 데이터 타입
+    - BINARY(N) : 고정 길이 이진 데이터
+    - VARBINARY(N) : 가변 길이 이진 데이터
+    - **BLOB** : Big Large OBject, 4GB 저장
+5. 논리 데이터 타입
+    - BOOLEAN : TRUE, FALSE
+6. 열거형 데이터 타입
+    - ENUM : 미리 정의된 값 중 하나를 저장
+        - ENUM('봄', '여름', '가을', '겨울')
+- 도메인 무결성 제약 조건 : 각 속성은 도메인(데이터 타입)에 지정된 값만 가져야 한다.
