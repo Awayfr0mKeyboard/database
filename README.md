@@ -27,7 +27,7 @@
 
 ## 데이터 모델
 - 현실 세계의 정보를 어떻게 구조화하고 조직화할지에 대한 청사진
-    - 예) 도서관 DB : 첵(제목, 저자, 출판년도, 출판사)
+    - 예) 도서관 DB : 책(제목, 저자, 출판년도, 출판사)
 
     1. 개념적(Conceptual) 데이터 모델
         - 일반 사용자들도 쉽게 이해할 수 있는 개념 모델
@@ -216,3 +216,38 @@
     - ENUM : 미리 정의된 값 중 하나를 저장
         - ENUM('봄', '여름', '가을', '겨울')
 - 도메인 무결성 제약 조건 : 각 속성은 도메인(데이터 타입)에 지정된 값만 가져야 한다.
+
+### CREATE 생성
+  - 새로운 데이터베이스 객체를 생성
+    - CREATE TABLE : 테이블 생성
+    - CREATE DATABASE : 데이터베이스 생성 (= CREATE SCHEMA)
+    - CREATE INDEX : 인덱스 생성
+    - CREATE VIEW : 뷰 생성
+    - CREATE USER : 유저 생성
+
+### 외래키 참조
+```sql
+FOREIGN KEY (참조하는 컬럼명) REFERENCES 참조되는 테이블명(참조되는 컬럼명)
+    ON DELETE [CASCADE|SET NULL|NO ACTION|SET DEFAULT]
+    ON UPDATE [CASCADE|SET NULL|NO ACTION|SET DEFAULT]
+```
+- 외래키 참조 옵션
+    - 참조된 키 값이 삭제되거나 수정될 때 외래키를 어떻게 할 것인지 선택
+- 옵션 종류
+    1. CASCADE : 참조된 키 값이 변경(삭제)되면 외래키도 함께 변경(삭제) 됨
+    2. SET NULL : 참조된 키 값이 변경(삭제)되면 외래키를 'NULL'로 설정
+    3. NO ACTION : 참조된 키 값이 변경(삭제)가 안되게 작업을 막음
+    4. SET DEFAULT : 참조된 키 값이 변경(삭제)되면 외래키를 '기본값'으로 설정 (MySQL에서는 지원하지 않음)
+    5. RESTRICT : 참조된 키 값이 변경(삭제)될 때 해당 작업을 제한 (NO ACTION과 유사, MySQL에서 기본값)
+
+* REVERSE ENGINEERING (역공학)
+    - CREATE TABLE로 생성된 SQL문을 거꾸로 ER 다이어그램 모델링으로 만들 수 있음.
+    - MySQL WorkBench
+        - 메뉴 - DataBase - ReverseEngineering(Ctrl + R)을 통해 실행
+
+### ALTER 문
+    - 데이터베이스 객체(주로 테이블)의 구조를 변경하기 위해 사용
+```sql
+ALTER TABLE 대상 테이블 명
+    [ADD|DROP|MODIFY|CHANGE|RENAME] [추가옵션]
+```
