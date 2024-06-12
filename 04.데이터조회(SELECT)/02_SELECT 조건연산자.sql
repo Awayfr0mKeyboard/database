@@ -24,7 +24,7 @@ select * from emp where deptno in (10, 30);
 -- 와일드카드 문자 '_' : 정확히 일치하는 한 문자
 
 -- 이름이 S로 시작하는 직원 조회
-select * from emp where ename like 's%';
+select * from emp where ename like 'S%';
 
 -- 이름의 두 번째 문자가 M인 직원을 조회
 select * from emp where ename like '_M%';
@@ -33,4 +33,4 @@ select * from emp where ename like '_M%';
 select * from emp where ename like '%S';
 
 -- 이름에 S가 포함되어 있는 직원 조회
-select * from emp where ename like '%s%';
+select * from emp where ename like '%S%';
